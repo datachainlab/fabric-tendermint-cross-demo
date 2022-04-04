@@ -14,6 +14,22 @@ The below command installs Relayer, Fabric tools, Fabric CLI, Tendermint CLI
 make -C demo build
 ```
 
+## Directory structure
+- cmds
+  - alpha ... Tendermint CLI
+  - beta ... Fabric CLI
+- contracts
+  - erc20 ... contract modules for Tendermint/Fabric
+- demo ... demo environment including 
+  - chains
+    - fabric ... fabric related files including docker-compose.yaml for network
+      - chaincode
+        - fabibc ... fabric chaincode application
+    - tendermint ... tendermint simapp working as CLI and tendermint application including docker-compose.yaml for network
+  - configs ... config files for alpha cli, beta cli, fabric app, relayer
+  - scripts ... shell scripts for alpha cli, beta cli, relayer, snenario
+- relayer ... Relayer CLI
+
 ### How tools work 
 - Relayer 
   - relaying packets between different chains
