@@ -1,6 +1,8 @@
 # fabric tendermint cross demo
 
-This is example for cross chain transaction using [Cross Framework](https://github.com/datachainlab/cross) between [Hyperledger Fabric](https://github.com/hyperledger/fabric) and [Tendermint](https://github.com/tendermint/tendermint). 
+This is example application for atomic swap through cross chain transaction using [Cross Framework](https://github.com/datachainlab/cross) between [Hyperledger Fabric](https://github.com/hyperledger/fabric) and [Tendermint](https://github.com/tendermint/tendermint). 
+
+As Atomic commit protocol, [Simple commit protocol](https://datachainlab.github.io/cross-docs/architecture/atomic-commit-protocol/#simple-commit-protocol) is used.
 
 ## Requirements
 - [Go](https://go.dev/) 1.16+
