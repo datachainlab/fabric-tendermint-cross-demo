@@ -45,6 +45,9 @@ make -C demo build
 - Tendermint CLI
   - creating tx, submitting tx, querying tx on Tendermint node
 
+### ERC20 Contracts
+See [README.md in contracts/erc20](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/contracts/erc20)
+
 ## Startup fabric and tendermint network
 ```Makefile
 # prepare fabric network and tendermint network using docker containers
