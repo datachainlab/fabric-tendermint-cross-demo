@@ -12,7 +12,7 @@ This directory consist of the following files/directories
 - scripts ... shell scripts for alpha cli, beta cli, relayer, snenario
 
 ## Setup Network
-```
+```Makefile
 # install fabric tools and build Fabric/Tendermint CLI, Relayer
 make build -j5
 
@@ -26,8 +26,27 @@ make clean
 make network
 ```
 
-## Run sample scenario
-```
+## About sample-scenario
+
+### Actor
+| Actor                  | Tendermint α | Fabric β             |
+|------------------------|--------------|----------------------|
+| Alice                  | account      | AliceMSP member      |
+| Bob                    | account      | BobMSP member        |
+| TokenOwner for α Chain | account      | -                    |
+| TokenOwner for β Chain | -            | TokenOwnerMSP member |
+
+### Relayer
+
+### Scenario
+Execute Cross-chain swap as below
+- Alice transfers 10 token to Bob on Tendermint α
+- Bob transfers 10 token to Alice on Fabric β
+
+See [scripts/scenario/sample-scenario](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/scripts/scenario/sample-scenario)
+
+### Run sample scenario
+```Makefile
 # initialize relayer, fabric CLI, tendermint CLI, run handshake for IBC between fabric and tendermint by creating transactions.
 make run-init
 

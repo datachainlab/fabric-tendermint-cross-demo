@@ -16,6 +16,12 @@ The below command installs Relayer, Fabric tools, Fabric CLI, Tendermint CLI
 make -C demo build -j5
 ```
 
+## Chains
+| Chain        | Node               | Role                    | Application   |
+|--------------|--------------------|-------------------------|---------------|
+| Tendermint   | 1 node             | Coordinator/Participant | ERC-20 Module |
+| Fabric       | 1 Orderer, 3 Peers | Participant             | ERC-20 Module |
+
 ## Directory structure
 - cmds
   - alpha ... Tendermint CLI
@@ -44,10 +50,7 @@ make -C demo build -j5
   - creating tx, submitting tx, querying tx on Fabric node
 - Tendermint CLI
   - creating tx, submitting tx, querying tx on Tendermint node
-
-### ERC20 Contracts
-See [README.md in contracts/erc20](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/contracts/erc20)
-
+  
 ## Startup fabric and tendermint network
 ```Makefile
 # prepare fabric network and tendermint network using docker containers
@@ -78,7 +81,15 @@ make -C demo network
 ```
 
 ## About sample-scenario
-There are 3 actors, Alice, Bob, TokenOwner.  
-Alice transfers 10 token to Bob on Tendermint. Then Bob transfers 10 token to Alice on Fabric.
+See [](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/add-more-info/demo#run-sample-scenario)
 
-See [scripts/scenario/sample-scenario](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/scripts/scenario/sample-scenario)
+## READMEs
+Additional information can be found.
+
+- [Alpha CLI for Tendermint](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/alpha)
+- [Beta CLI for Fabric](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/beta)
+- [ERC20 Contract](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/contracts/erc20)
+- [Demo](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo)
+- [Fabric](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo/chains/fabric)
+- [Fabibc Application](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo/chains/fabric/chaincode/fabibc)
+- [Tendermint Application](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo/chains/tendermint)
