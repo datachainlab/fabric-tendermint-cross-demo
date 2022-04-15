@@ -13,7 +13,7 @@ As Atomic commit protocol, [Simple commit protocol](https://datachainlab.github.
 The below command installs Relayer, Fabric tools, Fabric CLI, Tendermint CLI
 ```Makefile
 # install fabric tools and build Fabric/Tendermint CLI, Relayer
-make -C demo build
+make -C demo build -j5
 ```
 
 ## Directory structure
