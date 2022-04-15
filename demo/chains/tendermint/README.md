@@ -11,6 +11,17 @@ This directory consist of the following files/directories
 - docker-compose.yaml ... tendermint network.
 - Dockerfile ... Tendermint application `simd` is deployed as Docker container 
 
+## Deployment
+Built binary is deployed as Docker container using [Dockerfile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/Dockerfile) in this directory refered from [docker-compose.yaml](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/docker-compose.yaml).
+
+### Command and timing
+Actual deployment timing is the below. See [Makefile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/Makefile#L15).
+```
+- [make: demo build]
+- [make: demo network] -> [make: chains/tendermint network]
+```
+
+
 ## How to add ERC20 modules into simapp
 ### [simapp/app.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/simapp/app.go)
 - Create `BasicManager` with additional `AppModuleBasic{}`. [code](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/simapp/app.go#L157-L159)

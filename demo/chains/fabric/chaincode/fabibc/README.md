@@ -5,6 +5,13 @@ See [Fabric chaincode lifecycle](https://hyperledger-fabric.readthedocs.io/en/re
 ## Deployment
 Built binary is deployed as Docker container using [Dockerfile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/Dockerfile) in this directory refered from [docker-compose.yaml](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/docker-compose.yaml).
 
+### Command and timing
+Actual deployment timing is the below. See [Makefile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/Makefile#L14).  
+```
+- [make: demo network] -> [make: chains/fabric network] -> [make:  docker-images] -> [make: chaincode/fabibc docker-chaincode]
+- [make: demo network] -> [make: chains/fabric network] -> [make: network-chaincode]
+```
+
 ## How to add ERC20 modules into fabibc
 ### [main.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/main.go)
 - Add `genesisState` in InitChainer(). [code](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/main.go#L101-L112)
