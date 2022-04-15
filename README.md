@@ -81,10 +81,10 @@ make -C demo network
 ```
 
 ## About sample-scenario
-See [](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/add-more-info/demo#run-sample-scenario)
+See [About sample-scenario](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo#about-sample-scenario)
 
 ## READMEs
-Additional information can be found.
+Additional information can be found as below.
 
 - [Alpha CLI for Tendermint](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/alpha)
 - [Beta CLI for Fabric](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/beta)

@@ -44,8 +44,8 @@ It refers to [cosmos-sdk: bank cli](https://github.com/cosmos/cosmos-sdk/blob/v0
 
 ### ERC20Command
 This command corresponds to `QueryClient` in 
-[./contracts/erc20/modules/erc20mgr/types/query.pb.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/add-more-info/contracts/erc20/modules/erc20mgr/types/query.pb.go#L277-L281)
-and [req.Method in HandleContractCall()](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/add-more-info/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L43-L56)
+[./contracts/erc20/modules/erc20mgr/types/query.pb.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/types/query.pb.go#L277-L281)
+and [req.Method in HandleContractCall()](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L43-L56)
 - `erc20` ... ERC20 commands
   - `mint` ... Mint token
   - `approve` ... Approve token
