@@ -44,44 +44,40 @@ jobs:
         working-directory: demo
         run: |
           make test-betacli
-#  golangci:
-#    name: lint
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        go-version: [1.17]
-#    steps:
-#      - uses: actions/setup-go@v3
-#        with:
-#          go-version: ${{ matrix.go }}
-#      - uses: actions/checkout@v3
-#      - name: golangci-lint for alpha cmds
-#        uses: golangci/golangci-lint-action@v3
-#        with:
-#          version: v1.45.2
-#          working-directory: cmds/alpha
-#          #args: --config=../../.golangci.yml
-#          #skip-cache: true
-#      - name: golangci-lint for beta cmds
-#        uses: golangci/golangci-lint-action@v3
-#        with:
-#          version: v1.45.2
-#          working-directory: cmds/beta
-#      - name: golangci-lint for contract modules
-#        uses: golangci/golangci-lint-action@v3
-#        with:
-#          version: v1.45.2
-#          working-directory: contracts/erc20/
-#      - name: golangci-lint for fabibc
-#        uses: golangci/golangci-lint-action@v3
-#        with:
-#          version: v1.45.2
-#          working-directory: demo/chains/fabric/chaincode/fabibc
-#      - name: golangci-lint for simapp
-#        uses: golangci/golangci-lint-action@v3
-#        with:
-#          version: v1.45.2
-#          working-directory: demo/chains/tendermint
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.17
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      - uses: actions/checkout@v3
+      - name: golangci-lint for alpha cmds
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          working-directory: cmds/alpha
+      - name: golangci-lint for beta cmds
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          working-directory: cmds/beta
+      - name: golangci-lint for contract modules
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          working-directory: contracts/erc20/
+      - name: golangci-lint for fabibc
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          working-directory: demo/chains/fabric/chaincode/fabibc
+      - name: golangci-lint for simapp
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          working-directory: demo/chains/tendermint
   unit-test:
     name: unit-test
     runs-on: ubuntu-20.04
