@@ -17,10 +17,12 @@ make -C demo build -j5
 ```
 
 ## Chains
-| Chain        | Node               | Role                    | Application   |
-|--------------|--------------------|-------------------------|---------------|
-| Tendermint   | 1 node             | Coordinator/Participant | ERC-20 Module |
-| Fabric       | 1 Orderer, 3 Peers | Participant             | ERC-20 Module |
+| Chain        | Node               | Role                    | Application                |
+|--------------|--------------------|-------------------------|----------------------------|
+| Tendermint   | 1 node             | Coordinator/Participant | ERC-20 based on CDT Module |
+| Fabric       | 1 Orderer, 3 Peers | Participant             | ERC-20 based on CDT Module |
+
+- Refer to [CDT](https://github.com/datachainlab/cross-cdt)
 
 ## Directory structure
 - cmds

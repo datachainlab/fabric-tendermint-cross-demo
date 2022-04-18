@@ -10,30 +10,54 @@ _ module.AppModule             = AppModule{}
 _ module.AppModuleBasic        = AppModuleBasic{}
 _ contracttypes.ContractModule = AppModule{}
 ```
-- [module.AppModule](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0-beta1/types/module/module.go#L156-L183)
-- [module.AppModuleBasic](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0-beta1/types/module/module.go#L47-L60)
-- [contracttypes.ContractModule](https://github.com/datachainlab/cross/blob/v0.2.2/x/core/contract/types/types.go#L13-L15)
+
+Refer to source code  
+  - [module.AppModule](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0-beta1/types/module/module.go#L156-L183)
+  - [module.AppModuleBasic](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0-beta1/types/module/module.go#L47-L60)
+  - [contracttypes.ContractModule](https://github.com/datachainlab/cross/blob/v0.2.2/x/core/contract/types/types.go#L13-L15)
 
 See section [Introduction to SDK Modules](https://docs.cosmos.network/v0.44/building-modules/intro.html) to know Cosmos SDK Modules in detail.
 
-## erc20mgr module
-This module includes `mint`, `burn`, `transfer`, `approve`, `transferFrom` functionalities according to [EIP-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20).  
-See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L32-L57).
+## Erc20mgr module
+This module has ERC20 functionalities based on [CDT](https://github.com/datachainlab/cross-cdt) according to [EIP-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20).  
 
-1. Mint
-  - mint token for given account by signer account
-2. Burn
-  - burn token for given account by signer account
-3. Transfer
-  - transfer token from signer account to recipient account
-4. Approve
-  - allows spender account to withdraw from signer account up to the value amount
-5. TransferFrom
-  - transfer token from owner account to recipient account by spender account 
+### Functionalities based on [CDT](https://github.com/datachainlab/cross-cdt)
+1. Mint(account string, amount int64)
+  - create `amount` tokens and assigns them to `account`, increasing the total supply
+2. Burn(account string, amount int64)
+  - destroy `amount` tokens from `account`, reducing the total supply
+3. Transfer(spender, recipient string, amount int64)
+  - move `amount` of tokens from `sender` to `recipient`
+4. Approve(owner string, spender string, amount int64)
+  - approve sets `amount` as the allowance of `spender` over the caller's tokens
+5. TransferFrom(owner string, spender string, recipient string, amount int64)
+  - move `amount` tokens from `sender` to `recipient` using the alowance mechanism. `amount` is then deducted from the caller's allowance 
+6. Allowance(owner string, spender string) 
+  - return the remaining number of tokens that `spender` will be alowed to spend on behalf of `owner` through `transferFrom`. This is zeo by default.
+7. BalanceOf(account string)
+  - return the amount of tokens owned by `account`
+8. TotalSupply()
+  - return the amount of tokens in existence
 
-## erc20contract module
-This module includes `transfer` functionality called from cross framework for cross-chain. 
-See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/keeper/keeper.go#L29-L54).  
+### Handler and process flow
+This module includes `handler.go`  
+1. Message [MsgContractCallTx](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/types/msgs.pb.go#L33-L36) is submitted from CLI.
+2. `NewHandler()` is called from `Route()` in `module.go`
+3. `handleContractCallTx()` in `NewHandler()`  is called
+4. `HandleContractCall()` in `keepr.go` is called
+5. Then it calls function according to request method
+  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L32-L57).
 
+## Erc20contract module
+This module includes `transfer` functionality called from `Cross framework` for cross-chain. 
+
+### Functionalities
 1. Transfer
-  - transfer token from signer account to recipient account
+  - call `Transfer` of erc20mgr contract
+
+### Handler and process flow
+This module is called from only `Cross framework`.
+1. [OnContractCall()](https://datachainlab.github.io/cross-docs/architecture/overview#contract-module) in `module.go` is called from `Cross framework`
+2. `contractHandler()` set by `keeper.HandleContractCall` in called
+3. Then it calls function according to request method
+  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/keeper/keeper.go#L29-L54).  
