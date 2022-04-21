@@ -49,7 +49,7 @@ This module includes `handler.go`
   - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L32-L57).
 
 ## Erc20contract module
-This module includes `transfer` functionality called from `Cross framework` for cross-chain. 
+This module is [Contract Module](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-module) of [Cross Framework](https://github.com/datachainlab/cross) called from [Contract Manager](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-manager).
 
 ### Functionalities
 1. Transfer

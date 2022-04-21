@@ -51,8 +51,6 @@ Execute Cross-chain swap as below
 | TokenOwner for α Chain | account      | -                    |
 | TokenOwner for β Chain | -            | TokenOwnerMSP member |
 
-### Relayer
-
 
 ### Flow and Commands in [sample-scenario](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/scripts/scenario/sample-scenario)
 1. Run `erc20 mint` command for initial balance
@@ -117,13 +115,13 @@ printBeta "${BETACLI_BOB} cross ibc-signtx
 --initiator-chain-channel ${chan}"
 ```
 
-6. Relay packets on the given path in both directions.
+6. Relay packets on the given path in both directions for Authentication.
 ```bash
 printRelay "${RLY} tx relay ${PATH_NAME}"
 sleep 5
 ```
 
-7. Relay acknowledgements on the given path in both directions.
+7. Relay acknowledgements on the given path in both directions for Authentication.
 ```bash
 printRelay "${RLY} tx relay-acknowledgements ${PATH_NAME}"
 sleep 5

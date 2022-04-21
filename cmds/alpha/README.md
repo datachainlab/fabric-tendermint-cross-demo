@@ -39,7 +39,7 @@ It refers to [cosmos-sdk: bank cli](https://github.com/cosmos/cosmos-sdk/blob/v0
 - `cross` ... Cross Framework related commands
   - `create-contract-tx` ... Create a new contract transaction
   - `tx-auth-state` ... Query the state of a client in a given path
-  - `create-initiate-tx` ... Create a NewMsgInitiateTx transaction for a simple commit
+  - `create-initiate-tx` ... Create and submit a NewMsgInitiateTx transaction for a simple commit
   - `coordinator-state` ... Query the state of a coordinator in a given path
 
 ### ERC20Command

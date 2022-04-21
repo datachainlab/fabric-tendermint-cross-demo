@@ -32,7 +32,7 @@ func NewInitiateTxCmd(ctx *config.Context) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "create-initiate-tx",
-		Short: "Create a NewMsgInitiateTx transaction for a simple commit",
+		Short: "Create and submit a NewMsgInitiateTx transaction for a simple commit",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
