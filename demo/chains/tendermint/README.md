@@ -1,31 +1,39 @@
 # Tendermint Application
+
 These are packages used by go implementations of Tendermint CLI which contains not only Tendermint application `simd` but also various functionalities like key generations.
 
 ## Directory structure
-This directory consists of the following files/directories  
+
+This directory consists of the following files/directories
+
 - scripts
   - build-go-embedded ... build go packages
   - entrypoint.sh ... entry point for tendermint container
-  - tm-chain ... generating keys 
+  - tm-chain ... generating keys
 - simapp ... packages for `simd`
 - docker-compose.yaml ... tendermint network.
-- Dockerfile ... Tendermint application `simd` is deployed as Docker container 
+- Dockerfile ... Tendermint application `simd` is deployed as Docker container
 
 ## Deployment
+
 Built binary is deployed as Docker container using [Dockerfile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/Dockerfile) in this directory refered from [docker-compose.yaml](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/docker-compose.yaml).
 
 ### Command and timing
+
 The actual deployment timing is below. See [Makefile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/Makefile).
+
 ```
 - [make: demo build]
 - [make: demo network] -> [make: chains/tendermint network]
 ```
 
-
 ## How to add ERC20 modules into simapp
+
 ### [simapp/app.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/tendermint/simapp/app.go)
+
 - Create `BasicManager` with additional `AppModuleBasic{}`.
-```go
+
+````go
 ModuleBasics = module.NewBasicManager(
 	...
 	erc20.AppModuleBasic{},
@@ -33,9 +41,10 @@ ModuleBasics = module.NewBasicManager(
 	erc20contract.AppModuleBasic{},
 	```
 )
-```
+````
 
 - Add `Keeper`s into `SimApp` struct.
+
 ```go
 type SimApp struct {
 	...
@@ -47,6 +56,7 @@ type SimApp struct {
 ```
 
 - Add `StoreKeys` when creating `KVStoreKeys`.
+
 ```go
 keys := sdk.NewKVStoreKeys(
 	...
@@ -56,6 +66,7 @@ keys := sdk.NewKVStoreKeys(
 
 - Create modules in `NewSimApp()`.
   - Note. [cross-cdt](https://github.com/datachainlab/cross-cdt) data type is used for `Store` in this demo. So some code depend on CDT.
+
 ```go
 // Create a additional modules
 // Create CDT Store
@@ -77,6 +88,7 @@ erc20contractModule := erc20contract.NewAppModule(app.ERC20contractKeeper)
 ```
 
 - Setup a cross module using CDT.
+
 ```go
 // Setup a cross module
 app.XCCResolver = xcctypes.NewChannelInfoResolver(app.IBCKeeper.ChannelKeeper)
@@ -90,6 +102,7 @@ cmgr := contractkeeper.NewContractManager(
 ```
 
 - Create `Manager` with additional modules in `NewSimApp()`.
+
 ```go
 	app.mm = module.NewManager(
 		...
@@ -100,6 +113,7 @@ cmgr := contractkeeper.NewContractManager(
 ```
 
 - Add `ModuleName` when calling `SetOrderInitGenesis` in `NewSimApp()`.
+
 ```go
 app.mm.SetOrderInitGenesis(
 	...
@@ -108,6 +122,7 @@ app.mm.SetOrderInitGenesis(
 ```
 
 - Add `genesisState` in InitChainer().
+
 ```
 // erc20mgr module
 erc20mgrGenesisState := erc20mgrtypes.DefaultGenesis()
@@ -123,6 +138,7 @@ genesisState[erc20contract.AppModuleBasic{}.Name()] = app.AppCodec().MustMarshal
 ```
 
 - Add `Subspace` if used.
+
 ```go
 paramsKeeper.Subspace(erc20mgrtypes.ModuleName)
 ```

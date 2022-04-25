@@ -1,20 +1,27 @@
 # Fabibc Application
+
 These are packages used by go implementations of Fabric chaincode based on [fabric-ibc](https://github.com/datachainlab/public-docs/tree/master/fabric-ibc).  
 Refer to [yui-fabric-ibc](https://github.com/hyperledger-labs/yui-fabric-ibc), [Fabric chaincode lifecycle](https://hyperledger-fabric.readthedocs.io/en/release-2.2/chaincode_lifecycle.html).
 
 ## Deployment
+
 Built binary is deployed as Docker container using [Dockerfile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/Dockerfile) in this directory refered from [docker-compose.yaml](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/docker-compose.yaml).
 
 ### Command and timing
-The actual deployment timing is below. See [Makefile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/Makefile).  
+
+The actual deployment timing is below. See [Makefile](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/Makefile).
+
 ```
 - [make: demo network] -> [make: chains/fabric network] -> [make:  docker-images] -> [make: chaincode/fabibc docker-chaincode]
 - [make: demo network] -> [make: chains/fabric network] -> [make: network-chaincode]
 ```
 
 ## How to add ERC20 modules into fabibc
+
 ### [main.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/main.go)
+
 - Add `genesisState` in InitChainer(). [code](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/main.go)
+
 ```
 // erc20mgr module
 erc20mgrGenesisState := erc20mgrtypes.DefaultGenesis()
@@ -30,8 +37,10 @@ genesisState[erc20contract.AppModuleBasic{}.Name()] = app.AppCodec().MustMarshal
 ```
 
 ### [app/app.go](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/demo/chains/fabric/chaincode/fabibc/app/app.go)
+
 - Create `BasicManager` with additional `AppModuleBasic{}`.
-```go
+
+````go
 ModuleBasics = module.NewBasicManager(
 	...
 	erc20.AppModuleBasic{},
@@ -39,9 +48,10 @@ ModuleBasics = module.NewBasicManager(
 	erc20contract.AppModuleBasic{},
 	```
 )
-```
+````
 
 - Add `Keeper`s into `IBCApp` struct.
+
 ```go
 type IBCApp struct {
 	...
@@ -53,6 +63,7 @@ type IBCApp struct {
 ```
 
 - Add `StoreKeys` when creating `KVStoreKeys` in `NewIBCApp()`.
+
 ```go
 keys := sdk.NewKVStoreKeys(
 	...
@@ -61,7 +72,8 @@ keys := sdk.NewKVStoreKeys(
 ```
 
 - Create modules in `NewIBCApp()`.
-	- Note. [cross-cdt](https://github.com/datachainlab/cross-cdt) data type is used for `Store` in this demo. So some code depend on CDT.
+  - Note. [cross-cdt](https://github.com/datachainlab/cross-cdt) data type is used for `Store` in this demo. So some code depend on CDT.
+
 ```go
 // Create CDT Store
 schema := cdttypes.NewSchema()
@@ -82,6 +94,7 @@ erc20contractModule := erc20contract.NewAppModule(app.ERC20contractKeeper)
 ```
 
 - Setup a cross module using CDT in `NewIBCApp()`.
+
 ```go
 // Setup a cross module
 app.XCCResolver = xcctypes.NewChannelInfoResolver(app.IBCKeeper.ChannelKeeper)
@@ -95,6 +108,7 @@ cmgr := contractkeeper.NewContractManager(
 ```
 
 - Create `Manager` with additional modules in `NewIBCApp()`.
+
 ```go
 	app.mm = module.NewManager(
 		...
@@ -105,6 +119,7 @@ cmgr := contractkeeper.NewContractManager(
 ```
 
 - Add `ModuleName` when calling `SetOrderInitGenesis` in `NewIBCApp()`.
+
 ```go
 app.mm.SetOrderInitGenesis(
 	...
@@ -113,6 +128,7 @@ app.mm.SetOrderInitGenesis(
 ```
 
 - Add `Subspace` in `initParamsKeeper()` if used.
+
 ```go
 paramsKeeper.Subspace(erc20mgrtypes.ModuleName)
 ```
