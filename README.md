@@ -1,6 +1,6 @@
 # fabric tendermint cross demo
 
-This is example application for atomic swap through cross chain transaction using [Cross Framework](https://github.com/datachainlab/cross) between [Hyperledger Fabric](https://github.com/hyperledger/fabric) and [Tendermint](https://github.com/tendermint/tendermint). 
+This is an example application for an atomic swap through Cross-chain transaction using [Cross Framework](https://github.com/datachainlab/cross) between [Hyperledger Fabric](https://github.com/hyperledger/fabric) and [Tendermint](https://github.com/tendermint/tendermint). 
 
 As Atomic commit protocol, [Simple commit protocol](https://datachainlab.github.io/cross-docs/architecture/atomic-commit-protocol/#simple-commit-protocol) is used.
 
@@ -32,12 +32,12 @@ make -C demo build -j5
   - erc20 ... contract modules for Tendermint/Fabric
 - demo ... demo environment including 
   - chains
-    - fabric ... fabric related files including docker-compose.yaml for network
+    - fabric ... fabric-related files including docker-compose.yaml for network
       - chaincode
         - fabibc ... fabric chaincode application
     - tendermint ... tendermint simapp working as CLI and tendermint application including docker-compose.yaml for network
   - configs ... config files for alpha cli, beta cli, fabric app, relayer
-  - scripts ... shell scripts for alpha cli, beta cli, relayer, snenario
+  - scripts ... shell scripts for alpha cli, beta cli, relayer, scenario
 - relayer ... Relayer CLI
 
 ### How tools work 
@@ -52,7 +52,7 @@ make -C demo build -j5
   - creating tx, submitting tx, querying tx on Fabric node
 - Tendermint CLI
   - creating tx, submitting tx, querying tx on Tendermint node
-  
+
 ## Startup fabric and tendermint network
 ```Makefile
 # prepare fabric network and tendermint network using docker containers
@@ -61,9 +61,9 @@ make -C demo network
 
 ## Testing the demo
 ```Makefile
-# initialize relayer, fabric CLI, tendermint CLI, run handshake for IBC between fabric and tendermint by creating transactions.
+# initialize relayer, fabric CLI, tendermint CLI, and run handshake for IBC between fabric and tendermint by creating transactions.
 make -C demo run-init
-# run ./scripts/scenario/sample-scenario. See `About sample-scenario` section for more detail.
+# run ./scripts/scenario/sample-scenario. See the `About sample-scenario` section for more detail.
 make -C demo run
 ```
 
@@ -86,7 +86,7 @@ make -C demo network
 See [About sample-scenario](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/demo#about-sample-scenario)
 
 ## READMEs
-Additional information can be found as below.
+Additional information can be found below.
 
 - [Alpha CLI for Tendermint](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/alpha)
 - [Beta CLI for Fabric](https://github.com/datachainlab/fabric-tendermint-cross-demo/tree/main/cmds/beta)

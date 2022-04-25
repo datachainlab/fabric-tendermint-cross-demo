@@ -1,15 +1,15 @@
 # Demo
-This directory is used for playground to run demo and several temporary directries are generated after demo executed by scripts.
+This directory is used for the playground to run the demo and several temporary directories are generated after the demo is executed by scripts.
 
 ## Directory structure
-This directory consist of the following files/directories  
+This directory consists of the following files/directories  
 - chains
-  - fabric ... fabric related files including docker-compose.yaml for network
+  - fabric ... fabric-related files including docker-compose.yaml for network
     - chaincode
       - fabibc ... fabric chaincode application
   - tendermint ... tendermint simapp working as CLI and tendermint application including docker-compose.yaml for network
 - configs ... config files for alpha cli, beta cli, fabric app, relayer
-- scripts ... shell scripts for alpha cli, beta cli, relayer, snenario
+- scripts ... shell scripts for alpha cli, beta cli, relayer, scenario
 
 ## Setup Network
 ```Makefile
@@ -27,9 +27,9 @@ make network
 ```
 
 ## About sample-scenario
-Execute Cross-chain swap as below
-- Alice transfers 10 token to Bob on Tendermint α
-- Bob transfers 10 token to Alice on Fabric β
+Execute the Cross-chain swap as below
+- Alice transfers 10 tokens to Bob on Tendermint α
+- Bob transfers 10 tokens to Alice on Fabric β
 
 #### Initial Balance
 |       | Tendermint α | Fabric β |
@@ -115,13 +115,13 @@ printBeta "${BETACLI_BOB} cross ibc-signtx
 --initiator-chain-channel ${chan}"
 ```
 
-6. Relay packets on the given path in both directions for Authentication.
+6. Relay packets on the given path in both direcions for Authentication.
 ```bash
 printRelay "${RLY} tx relay ${PATH_NAME}"
 sleep 5
 ```
 
-7. Relay acknowledgements on the given path in both directions for Authentication.
+7. Relay acknowledgments on the given path in both directions for Authentication.
 ```bash
 printRelay "${RLY} tx relay-acknowledgements ${PATH_NAME}"
 sleep 5
@@ -197,7 +197,7 @@ assertEqual $actual_bob_beta $expected_bob_beta \
 
 ### Run sample scenario
 ```Makefile
-# initialize relayer, fabric CLI, tendermint CLI, run handshake for IBC between fabric and tendermint by creating transactions.
+# initialize relayer, fabric CLI, tendermint CLI, and run handshake for IBC between fabric and tendermint by creating transactions.
 make run-init
 
 # run ./scripts/scenario/sample-scenario. See `About sample-scenario` section for more detail.

@@ -1,10 +1,10 @@
 # ERC20 Contract
 
-Each of modules is in `modules` directory.  
-These contract modules are developed based of [Cosmos SDK](https://docs.cosmos.network/v0.44/). 
-Note that these modules depend on version `v0.43.0-beta1` for now. See [go.mod](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/go.mod#L7).
+Each of the modules is in the `modules` directory.  
+These contract modules are developed based on [Cosmos SDK](https://docs.cosmos.network/v0.44/). 
+Note that these modules depend on version `v0.43.0-beta1` for now. See [go.mod](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/go.mod).
 
-Each of modules needs to meet specific [Interfaces](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/module.go#L26-L28).
+Each of modules needs to meet specific [Interfaces](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/module.go).
 ```go
 _ module.AppModule             = AppModule{}
 _ module.AppModuleBasic        = AppModuleBasic{}
@@ -31,9 +31,9 @@ This module has ERC20 functionalities based on [CDT](https://github.com/datachai
 4. Approve(owner string, spender string, amount int64)
   - approve sets `amount` as the allowance of `spender` over the caller's tokens
 5. TransferFrom(owner string, spender string, recipient string, amount int64)
-  - move `amount` tokens from `sender` to `recipient` using the alowance mechanism. `amount` is then deducted from the caller's allowance 
+  - move `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance 
 6. Allowance(owner string, spender string) 
-  - return the remaining number of tokens that `spender` will be alowed to spend on behalf of `owner` through `transferFrom`. This is zeo by default.
+  - return the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through `transferFrom`. This is zero by default.
 7. BalanceOf(account string)
   - return the amount of tokens owned by `account`
 8. TotalSupply()
@@ -41,15 +41,15 @@ This module has ERC20 functionalities based on [CDT](https://github.com/datachai
 
 ### Handler and process flow
 This module includes `handler.go`  
-1. Message [MsgContractCallTx](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/types/msgs.pb.go#L33-L36) is submitted from CLI.
+1. Message [MsgContractCallTx](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/types/msgs.pb.go) is submitted from CLI.
 2. `NewHandler()` is called from `Route()` in `module.go`
 3. `handleContractCallTx()` in `NewHandler()`  is called
 4. `HandleContractCall()` in `keepr.go` is called
 5. Then it calls function according to request method
-  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go#L32-L57).
+  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20mgr/keeper/keeper.go).
 
 ## Erc20contract module
-This module is [Contract Module](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-module) of [Cross Framework](https://github.com/datachainlab/cross) called from [Contract Manager](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-manager).
+This module is a [Contract Module](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-module) of [Cross Framework](https://github.com/datachainlab/cross) called from [Contract Manager](https://datachainlab.github.io/cross-docs/architecture/overview/#contract-manager).
 
 ### Functionalities
 1. Transfer
@@ -60,4 +60,4 @@ This module is called from only `Cross framework`.
 1. [OnContractCall()](https://datachainlab.github.io/cross-docs/architecture/overview#contract-module) in `module.go` is called from `Cross framework`
 2. `contractHandler()` set by `keeper.HandleContractCall` in called
 3. Then it calls function according to request method
-  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/keeper/keeper.go#L29-L54).  
+  - See [HandleContractCall function](https://github.com/datachainlab/fabric-tendermint-cross-demo/blob/main/contracts/erc20/modules/erc20contract/keeper/keeper.go).  
