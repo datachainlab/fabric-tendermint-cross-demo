@@ -14,7 +14,7 @@ import (
 func GetCoordinatorState(ctx *config.Context) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "coordinator-state [tx-id]",
-		Short: "Query the state of a client in a given path",
+		Short: "Query the state of a coordinator in a given path",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)

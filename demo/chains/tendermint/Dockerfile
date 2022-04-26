@@ -2,7 +2,7 @@ ARG GOLAGN_VER=1.15.8
 ARG ALPINE_VER=3.13
 
 FROM golang:${GOLAGN_VER}-alpine${ALPINE_VER} AS scaffold-initializer
-RUN apk add --no-cache jq=1.6-r1 bash=5.1.0-r0
+RUN apk add --no-cache jq=1.6-r1 bash=5.1.16-r0
 
 WORKDIR /root
 

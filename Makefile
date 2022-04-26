@@ -1,4 +1,4 @@
-GOLANGCI_VERSION=v1.44.2
+GOLANGCI_VERSION=v1.45.2
 
 # version should be updated periodically
 .PHONY: install-tools
