@@ -7,6 +7,7 @@ services:
   fabric-orderer.fabric-tendermint-cross-demo.com:
     container_name: fabric-orderer.fabric-tendermint-cross-demo.com
     image: hyperledger/fabric-orderer:${IMAGE_TAG}
+    platform: linux/amd64
     environment:
       - FABRIC_LOGGING_SPEC=INFO
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -31,8 +32,8 @@ services:
   fabric-peer0.org1.fabric-tendermint-cross-demo.com:
     container_name: fabric-peer0.org1.fabric-tendermint-cross-demo.com
     image: hyperledger/fabric-peer:${IMAGE_TAG}
+    platform: linux/amd64
     environment:
-      - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_ID=fabric-peer0.org1.fabric-tendermint-cross-demo.com
       - CORE_PEER_ADDRESS=fabric-peer0.org1.fabric-tendermint-cross-demo.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
