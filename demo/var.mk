@@ -13,8 +13,6 @@ TENDERMINT_TAG ?= latest
 
 PROXY_TAG ?= latest
 
-HOST_ARCH := $(shell uname -m)
-
 .PHONY: wait-for-launch
 wait-for-launch:
 	$(MAKEFILE_DIR)scripts/wait-for-launch $(ATTEMPT) $(CONTAINER)
