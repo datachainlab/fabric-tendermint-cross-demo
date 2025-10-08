@@ -18,18 +18,18 @@ network:
 
 .PHONY: network-common
 network-common:
-	IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} up -d \
+	FABRIC_PLATFORM=${FABRIC_PLATFORM} IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} up -d \
 	fabric-orderer.fabric-tendermint-cross-demo.com \
 	fabric-peer0.org1.fabric-tendermint-cross-demo.com
 
 .PHONY: network-chaincode
 network-chaincode:
-	IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} up -d \
+	FABRIC_PLATFORM=${FABRIC_PLATFORM} IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} up -d \
 	fabric-chaincode.org1.fabric-tendermint-cross-demo.com
 
 .PHONY: network-down
 network-down:
-	IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} down -v --remove-orphans
+	FABRIC_PLATFORM=${FABRIC_PLATFORM} IMAGE_TAG=${FABRIC_VERSION} ${DOCKER_COMPOSE} down -v --remove-orphans
 
 .PHONY: clean
 clean:

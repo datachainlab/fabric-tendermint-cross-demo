@@ -7,10 +7,13 @@ MAKEFILE_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 FABRIC_VERSION    ?=2.2.0
 FABRIC_CA_VERSION ?=1.4.7
+FABRIC_PLATFORM   ?=linux/amd64
 
 TENDERMINT_TAG ?= latest
 
 PROXY_TAG ?= latest
+
+HOST_ARCH := $(shell uname -m)
 
 .PHONY: wait-for-launch
 wait-for-launch:
