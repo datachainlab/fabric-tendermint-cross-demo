@@ -8,4 +8,4 @@ CHAINCODE_CCID_ORG1=$(cat ${PROJECT_DIR}/build/Org1-fabibc-ccid.txt)
 
 set -x
 CHAINCODE_CCID_ORG1=${CHAINCODE_CCID_ORG1} \
-docker-compose -f docker-compose-chaincode.yaml up -d \
+docker compose -f docker-compose-chaincode.yaml up -d \
