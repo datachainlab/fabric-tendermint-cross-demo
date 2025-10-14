@@ -6,7 +6,7 @@ As Atomic commit protocol, [Simple commit protocol](https://datachainlab.github.
 
 ## Requirements
 
-- [Go](https://go.dev/) 1.16+
+- [Go](https://go.dev/) 1.16–1.18
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [jq](https://stedolan.github.io/jq/)
 
@@ -67,6 +67,10 @@ make -C demo network
 ```
 
 ## Testing the demo
+
+This demo is primarily developed and validated on **Go 1.18**, and is supported on **Go 1.16–1.18**.  
+**Go 1.19 and later may exhibit unstable behavior** due to dependency and runtime differences.  
+To ensure a reproducible setup, we **strongly recommend Go 1.18**.
 
 ```Makefile
 # initialize relayer, fabric CLI, tendermint CLI, and run handshake for IBC between fabric and tendermint by creating transactions.
