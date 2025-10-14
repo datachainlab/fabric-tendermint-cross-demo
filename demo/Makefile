@@ -3,10 +3,10 @@
 # `-j` option (short for –jobs) specifies the number of jobs that are run at the same time
 .PHONY: build
 build:
-	make -C ../relayer build && mkdir -p ./bin && cp ../relayer/build/uly ./bin/ & \
-	make -C chains/fabric bin & \
-	cd chains/tendermint && go mod vendor && make docker-images & \
-	make -C ../cmds/alpha build & \
+	make -C ../relayer build && mkdir -p ./bin && cp ../relayer/build/uly ./bin/
+	make -C chains/fabric bin
+	cd chains/tendermint && go mod vendor && make docker-images
+	make -C ../cmds/alpha build
 	make -C ../cmds/beta build
 
 .PHONY: network
