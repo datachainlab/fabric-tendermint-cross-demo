@@ -9,7 +9,7 @@ on:
 jobs:
   demo:
     name: demo
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Set up Go 1.16
         uses: actions/setup-go@v1
@@ -17,7 +17,7 @@ jobs:
           go-version: 1.16
       - uses: actions/checkout@v2
       - name: Cache go modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/go-build
@@ -85,7 +85,7 @@ jobs:
           working-directory: demo/chains/tendermint
   unit-test:
     name: unit-test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Set up Go 1.16
         uses: actions/setup-go@v2
@@ -93,7 +93,7 @@ jobs:
           go-version: 1.16
       - uses: actions/checkout@v2
       - name: Cache go modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/go-build
